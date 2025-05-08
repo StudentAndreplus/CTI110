@@ -5,4 +5,4 @@
 
 first_name = input('first name? ')
 last_name = input('last name? ')
-print ("Hello there!" , first_name , last_name , "welcome to CTI-110" )
+print (f"Hello there! {first_name} {last_name} welcome to CTI-110" )
