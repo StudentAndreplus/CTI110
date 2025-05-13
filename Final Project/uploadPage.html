@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #8ab8ea;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #87b8ed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Your Music</h1>
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data"></form>
+        <label for="song-name">Song Name:</label>
+        <input type="text" id="song-name" name="song_name" required>
+
+        <label for="song-length">Song Length (in minutes):</label>
+        <input type="number" id="song-length" name="song_length" step="0.01" required>
+
+        <label for="genre">Genre:</label>
+        <select id="genre" name="genre" required>
+            <option value="">Select a genre</option>
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="hiphop">Hip-Hop</option>
+            <option value="jazz">Jazz</option>
+            <option value="classical">Classical</option>
+        </select>
+
+        <label for="artist-name">Artist Name:</label>
+        <input type="text" id="artist-name" name="artist_name" required>
+
+        <label for="date-created">Date Created:</label>
+        <input type="date" id="date-created" name="date_created" required>
+
+        <label for="music-file">Upload Music File:</label>
+        <input type="file" id="music-file" name="music_file" accept="audio/*" required>
+
+        <button type="submit">Upload</button>
+    </form>
+    <a href="index.html" class="back-button">Back to Main Page</a>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const songName = document.getElementById('song-name').value;
+            const songLength = document.getElementById('song-length').value;
+            const genre = document.getElementById('genre').value;
+            const artistName = document.getElementById('artist-name').value;
+            const dateCreated = document.getElementById('date-created').value;
+
+            const musicTable = window.opener?.document.getElementById('music-table');
+            if (musicTable) {
+                const newRow = musicTable.insertRow();
+                newRow.innerHTML = `
+                    <td>${songName}</td>
+                    <td>${songLength}</td>
+                    <td>${genre}</td>
+                    <td>${artistName}</td>
+                    <td>${dateCreated}</td>
+                `;
+                alert('Music added to the table on the music page.');
+                window.close();
+            } else {
+                alert('Music table not found on the music page.');
+            }
+        });
+    </script>
+</body>
+</html>

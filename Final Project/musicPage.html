@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Library</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #8ab8ea;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #87b8ed;
+        }
+    </style>
+</head>
+<body>
+    <h1>User's Music Library</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Genre</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example row -->
+            <tr>
+                <td>Example Song</td>
+                <td>Example Artist</td>
+                <td>Example Album</td>
+                <td>Pop</td>
+                <td>2023</td>
+            </tr>
+            <!-- Additional rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <a href="index.html" class="back-button">Back to Main Page</a>
+</body>
+<script>
+    // JavaScript to dynamically add rows can be added here
+    // For example, you can fetch data from a server and populate the table
+    // Example function to add a new row
+    function addRow(title, artist, album, genre, year) {
+        const table = document.querySelector('tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${title}</td>
+            <td>${artist}</td>
+            <td>${album}</td>
+            <td>${genre}</td>
+            <td>${year}</td>
+        `;
+        table.appendChild(newRow);
+    }
+    // Example usage
+    // Example usage with data from uploadPage
+    // Assuming uploadPage sends data via localStorage or another mechanism
+    const uploadedSongs = JSON.parse(localStorage.getItem('uploadedSongs')) || [];
+
+    uploadedSongs.forEach(song => {
+        addRow(song.title, song.artist, song.album, song.genre, song.year);
+    });
+    // You can replace the above example with actual data fetching logic
+    </script>
+</html>
